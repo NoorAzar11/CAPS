@@ -57,9 +57,8 @@ describe('Testing Driver', () => {
 ///////////////
 describe('Testing Vendor', () => {
     it('Testing vendor', () => {
-    
-        Testingvendor ('deliveredItems', payload)
-        expect(Testingvendor .emit('deliveredItems', payload)).toEqual(true)
+        Testingvendor.emit('deliveredItems', payload)
+        expect(Testingvendor.emit('deliveredItems', payload)).toEqual(true)
     })
 
 })
