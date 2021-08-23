@@ -1,20 +1,20 @@
 'use strict';
 
 const events = require('../events');
-const event = require('../events');
 
-events.on('dileveredOrders',payload => {
+
+events.on('dileveredOrdersup',payload => {
 
     setTimeout(() => {
         console.log(`DRIVER: picked up ${payload.orderID}`);
-        events.emit('transit',payload);
+        events.emit('deliveredItems',payload);
     },1000)
 });
 
-events.on('driver',payload => {
+events.on('deliveredItems',payload => {
     setTimeout(() => {
         console.log(`DRIVER: picked up and dilver it : ${payload.orderID}`);
-        events.emit('driverdilveredOrders',payload);
+        events.emit('driverDeliverItems',payload);
     },3000);
 })
 

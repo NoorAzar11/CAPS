@@ -7,22 +7,22 @@ const faker=require('faker');
 
 setInterval(() => {
     setTimeout(() => {
-        let CstOrder={
+        let customerorder={
 
             Store:process.env.STORE||'Flowers Store',
             orderID:faker.datatype.uuid(),
             customer:faker.name.findName(),
-            address:faker.address.streetAddress()
+            address:faker.address.streetAddress(),
 
 
-        }
-        events.emit('Orders',CstOrder)
+        };
+        events.emit('Pickup',customerorder)
     },5000);
 },5000);
 
 
-events.on('deliveredItems',payload=>{
-    console.log(`Dilvered Items ${payload.orderID}`);
+events.on('VendorDeliveredItems',payload=>{
+ console.log(`Thank you for delivering ${payload.orderID}`);
     events.emit('deliveredItems',payload)
 
 })
@@ -34,3 +34,5 @@ events.on('deliveredItems',payload=>{
 //   orderID: 'e3669048-7313-427b-b6cc-74010ca1f8f0',
 //   customer: 'Jamal Braun',
 //   address: 'Schmittfort, LA' } }
+
+module.exports =events;

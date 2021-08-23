@@ -14,25 +14,25 @@ let month=new Intl.DateTimeFormat('en',{month:'numeric'}).format(date);
 let day=new Intl.DateTimeFormat('en',{day:'2-digit'}).format(date);
 let time=date.toLocaleDateString();
 
-events.on('ordOrdersers',payload=>{
+events.on('Pickup',payload=>{
     console.log('EVENT:', {
-        event: 'Orders',
-        time:`${year}-${month}-${day}`,
+        event: 'Pickup',
+        time:`${year}-${month}-${day} Time ${time}`,
         payload:payload
         
     })
-    events.emit('dileveredOrders',payload);
+    events.emit('dileveredOrdersup',payload);
 })
 ///////////
 
 events.on('transit',payload=>{
     console.log('event:', {
         event:'transit',
-        time:`${year}-${month}-${day}`,
+        time:`${year}-${month}-${day} Time ${time}`,
         payload:payload
         
     })
-    events.emit('driver',payload);
+    events.emit('driver-transit',payload);
 
 ////////////////////
 // events.on('transit',payload=>{
@@ -49,11 +49,11 @@ events.on('transit',payload=>{
 events.on('deliveredItems',payload=>{
     console.log('event:', {
         event:'dilvered',
-        time:`${year}-${month}-${day}`,
+        time:`${year}-${month}-${day} Time ${time}`,
         payload:payload
         
     })
-    events.emit('driverdilveredOrders',payload)
+    events.emit('driverDeliverItems',payload)
 })
 })
      
