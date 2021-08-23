@@ -33,11 +33,11 @@ describe('Testing CAPS', () => {
         expect(CAPSTESting.emit('transit', payload)).toEqual(true)
     })
 
-    // it('transit', () => {
+    it('transit', () => {
         
-    //     CAPSTESting.emit('deliveredItems', payload)
-    //     expect(CAPSTESting.emit('deliveredItems', payload)).toEqual(true)
-    // })
+        CAPSTESting.emit('deliveredItems', payload)
+        expect(CAPSTESting.emit('deliveredItems', payload)).toEqual(true)
+    })
 
 })
 
