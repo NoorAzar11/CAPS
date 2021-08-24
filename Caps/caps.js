@@ -11,6 +11,8 @@
 const io=require('socket.io-client');
 let host='http//localhost:3000';
 
+const io2=require('socket.io');
+
 const driverConnOrdered=io.connect(host);
 
 let date=new Date();
@@ -33,24 +35,30 @@ driverConnOrdered.on('connectionPickUpOrders',payload=>{
 
     });
 
+    driverConnOrdered.on('connectioninTransits',payload=>{
+   
+
     console.log('EVENT:',{
         event:'in-transit',
         time:`${year}-${month}-${day} Time ${time}`,
         payload:payload,
 
     });
+})
 
+driverConnOrdered.on('connectionDelivered',payload=>{
     console.log('EVENT:',{
         event:'delivered',
         time:`${year}-${month}-${day} Time ${time}`,
         payload:payload,
 
     });
-    
-    
-
-
 })
+    
+})
+
+module.exports =io2;
+
 
 
 

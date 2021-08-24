@@ -14,17 +14,20 @@ io.on('connection',(socket)=>{
 
     socket.on('delivered',payload =>{
         console.log('delivered',payload.orderID)
-        io.emit('connectionPickUpOrders',payload);
+        io.emit('connectionDelivered',payload);
     });
 
     socket.on('in-transit',payload =>{
-        io.emit('connectionPickUpOrders',payload);
+        io.emit('connectioninTransits',payload);
     });
 
     socket.on('DilveredOrder',payload=>{
+        
 io.emit('orderdItem', payload);
     })
 })
+
+module.exports=io;
 
 
 

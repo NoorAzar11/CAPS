@@ -6,10 +6,11 @@
 // const faker=require('faker');
 
 const io=require('socket.io-client');
-
-const io2=require('socket.io')
-
 const pickup=io.connect('http://localhost:3001');
+const port=3000||3001;
+const io2=require('socket.io')(port);
+
+
 
 pickup.on('pickup',payload => {
     console.log('Thank You for Dilvering',payload)
