@@ -1,12 +1,13 @@
 'use strict';
 
+const faker=require('faker');
 const io=require('socket.io-client');
+// const socket2=require('socket.io')
 
 let host='http://localhost:3000';
-const faker=require('faker');
 
 const capsconOrdered=io.connect(host);
-const pickup=io.connect('`${host}/pickup');
+
 
 setInterval(() => {
     setTimeout(() => {
@@ -24,5 +25,7 @@ setInterval(() => {
               capsconOrdered.emit('in-transit', customerorder)
               capsconOrdered.emit('delivered', customerorder)
               capsconOrdered.emit('DilveredOrder', customerorder.orderID)
-    },3000)
-},1500)
+    },1500)
+},3000)
+
+// module.exports =socket2;
