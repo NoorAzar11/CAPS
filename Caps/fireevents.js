@@ -1,31 +1,31 @@
 'use strict';
 
-const faker=require('faker');
-const io=require('socket.io-client');
-// const socket2=require('socket.io')
+const io = require('socket.io-client');
+const faker = require('faker');
 
-let host='http://localhost:3000';
+const firingEventsConnection = io.connect('http://localhost:5000');
 
-const capsconOrdered=io.connect(host);
+
 
 
 setInterval(() => {
     setTimeout(() => {
         
-        let customerorder={
+        let customerOrder = {
 
-           Store:process.env.STORE||'Flowers Store',
-        orderID:faker.datatype.uuid(),
-    customer:faker.name.findName(),
-       address:faker.address.streetAddress(),
-            
-            
-              }
-              capsconOrdered.emit('pickup', customerorder)
-              capsconOrdered.emit('in-transit', customerorder)
-              capsconOrdered.emit('delivered', customerorder)
-              capsconOrdered.emit('DilveredOrder', customerorder.orderID)
-    },1500)
-},3000)
+            store: process.env.store || 'FlowerStore',
+            orderId: faker.datatype.uuid(),
+            customerName: faker.name.findName(),
+            address: faker.address.streetAddress()
+        }
 
-// module.exports =socket2;
+        firingEventsConnection.emit('pickup', customerOrder)
+        firingEventsConnection.emit('in-trainst', customerOrder)
+        firingEventsConnection.emit('deliverd', customerOrder)
+        firingEventsConnection.emit('orderdItems', customerOrder.orderId)
+
+
+    }, 1500)
+}, 3000)
+
+
