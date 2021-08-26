@@ -21,9 +21,8 @@ setInterval(() => {
 },5000);
 
 
-events.on('VendorDeliveredItems',payload=>{
- console.log(`Thank you for delivering ${payload.orderID}`);
-    events.emit('deliveredItems',payload)
+events.on('driverDeliverItems',payload=>{
+ console.log(`VENDOR: Thank you for delivering ${payload.orderID}`);
 
 })
 

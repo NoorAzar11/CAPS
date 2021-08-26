@@ -1,8 +1,9 @@
+
 'use strict';
 
 
 const events = require('../events');
-const event = require('../events')
+
 require('dotenv').config()
 require('./vendor');
 require('./driver');
@@ -20,42 +21,32 @@ events.on('Pickup',payload=>{
         time:`${year}-${month}-${day} Time ${time}`,
         payload:payload
         
-    })
-    events.emit('dileveredOrdersup',payload);
-})
-///////////
-
-events.on('transit',payload=>{
+        
+    })  
+ 
+    console.log(`DRIVER: picked up ${payload.orderID}`);
+    
     console.log('event:', {
-        event:'transit',
+        event:'in-transit',
         time:`${year}-${month}-${day} Time ${time}`,
         payload:payload
         
     })
-    events.emit('driver-transit',payload);
-
-////////////////////
-// events.on('transit',payload=>{
-//     console.log('event:', {
-//         event:'transit',
-//         time:`${year}-${month}-${day}`,
-//         payload:payload
-        
-//     })
-//     events.emit('driver',payload);
-// })
-////////////////////////////////
-
-events.on('deliveredItems',payload=>{
+ 
+    console.log(`DRIVER: delivered up : ${payload.orderID}`);
     console.log('event:', {
         event:'dilvered',
         time:`${year}-${month}-${day} Time ${time}`,
         payload:payload
         
     })
-    events.emit('driverDeliverItems',payload)
+   
+    events.emit('driverDelivers',payload)
 })
-})
+
+
+
+
      
 
 module.exports =events;
