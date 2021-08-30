@@ -5,18 +5,14 @@ const uuid = require('uuid').v4;
 const port=process.env.PORT || 3000;
 const io=require('socket.io')(port);
 const caps=io.of('/caps')
-
 const messageQueue = {Duty : {}}
 
 let time = new Date()
-
 io.on('connection',socket=>{
     console.log('CONNECTED SUCCESSFULLY ',socket.id);
 });
-
 caps.on('connection',socket=>{
     console.log('CONNECTED SUCCESSFULLY ',socket.id);
-
     socket.on('pickup',payload=>{
         console.log("adding a new dudty")
         const id = uuid();
@@ -24,24 +20,20 @@ caps.on('connection',socket=>{
         messageQueue.Duty[id] = payload;
         socket.emit('addedToCaps', payload); 
         caps.emit('driverPickupToCaps',{id: id, payload: messageQueue.Duty[id]});
-        console.log("after we added messageQueue ", messageQueue)
+        console.log("after we add message Queue", messageQueue)
     });
-
     socket.on('get_all_items', ()=> {
         console.log("get_all_items : driver wants to get vendor messages ")
         Object.keys(messageQueue.Duty).forEach(id=> {
             socket.emit('driverPickupToCaps', {id: id, payload: messageQueue.Duty[id] })
         });
     });
-
     socket.on('received',message=>{
         console.log("received message from queue will and remove it")
         delete messageQueue.Duty[message.id];
         console.log("after We delete meassage from Queue  ", messageQueue)
         caps.emit('driverTransitToCaps',message);
     });
-
-
     socket.on('deleverd',message=>{
         console.log('event:',{
             event:'deleverd',
@@ -51,8 +43,6 @@ caps.on('connection',socket=>{
         caps.emit('deleverd',message);
         caps.emit('vendorDileverdToCaps',message);
     });
-
-
 })
 
 module.exports=caps

@@ -11,20 +11,16 @@ const path=process.env.path || 'http://localhost:3000';
 const socket=io.connect(`${path}/caps`);
 
 socket.emit('get_all_items');
-
 socket.on('driverPickupToCaps', meassage=>{
     setTimeout(()=>{
         console.log('DRIVER: picked up vendor meassage :',meassage.id);
         socket.emit('received',meassage);
     },5000);
 });
-
-
 socket.on('driverTransitToCaps',meassage=>{
     setTimeout(()=>{
         console.log(`DRIVER: Delivered The Items ${meassage.id}`);
         socket.emit('deleverd',meassage);
-        
     },3000)
 });
 
